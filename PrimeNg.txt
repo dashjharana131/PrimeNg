@@ -1,0 +1,571 @@
+	
+	**********-----------PrimeNg-----------************
+	---------------------------------------------------
+	Step-1:
+	
+
+	npm install primeng --save
+	npm install primeicons --save
+	npm install @angular/animations --save
+	----------------------------------------------------
+	
+
+	Step-2: (app.module.ts)
+	
+
+	import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+	
+
+	@NgModule({
+	    imports: [
+	        BrowserAnimationsModule,
+	    ]
+	})
+	-----------------------------------------------------
+	
+
+	Step-3: (angular.json)
+	
+
+	"styles": [
+	  "node_modules/primeicons/primeicons.css",
+	  "node_modules/primeng/resources/themes/nova-light/theme.css",
+	  "node_modules/primeng/resources/primeng.min.css"
+	]
+	
+
+	---------------------------------------------------
+	*********-------PrimeNg(Dropdown)------************
+	---------------------------------------------------
+	--> npm install @angular/cdk --save
+	
+
+	--> import {DropdownModule} from 'primeng/dropdown';       (app.module.ts)
+	
+
+	Template:
+	---------
+	<p-dropdown [options]="cities1" [(ngModel)]="selectedCity1"></p-dropdown>
+	<p-dropdown [options]="cities2" [(ngModel)]="selectedCity2" optionLabel="name"></p-dropdown>
+	
+
+	TypeScript:
+	-----------
+	import {SelectItem} from 'primeng/api';
+
+	interface City {
+	name: string;
+	code: string;
+	}
+
+	export class MyModel {
+
+    cities1: SelectItem[];
+    
+    cities2: City[];
+
+    selectedCity1: City;
+    
+    selectedCity2: City;
+
+    constructor() {
+        //SelectItem API with label-value pairs
+        this.cities1 = [
+            {label:'Select City', value:null},
+            {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
+            {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
+            {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
+            {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
+            {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
+        ];
+        
+        //An array of cities
+        this.cities2 = [
+            {name: 'New York', code: 'NY'},
+            {name: 'Rome', code: 'RM'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Paris', code: 'PRS'}
+        ];
+    }
+
+}
+
+	
+
+	---------------------------------------------------
+	*********-------PrimeNg(LightBox)------************
+	---------------------------------------------------
+	-->  import {LightboxModule} from 'primeng/lightbox';
+	
+
+	Template:
+	---------
+	<p-lightbox [images]="images"></p-lightbox>
+	
+
+	TypeScript:
+	-----------
+	export class LightboxDemo {
+
+    images: any[];
+
+    constructor() {
+        this.images = [];
+        this.images.push({source:'assets/showcase/images/demo/sopranos/sopranos1.jpg', thumbnail: 'assets/showcase/images/demo/sopranos/sopranos1_small.jpg', title:'Sopranos 1'});
+        this.images.push({source:'assets/showcase/images/demo/sopranos/sopranos2.jpg', thumbnail: 'assets/showcase/images/demo/sopranos/sopranos2_small.jpg', title:'Sopranos 2'});
+        this.images.push({source:'assets/showcase/images/demo/sopranos/sopranos3.jpg', thumbnail: 'assets/showcase/images/demo/sopranos/sopranos3_small.jpg', title:'Sopranos 3'});
+        this.images.push({source:'assets/showcase/images/demo/sopranos/sopranos4.jpg', thumbnail: 'assets/showcase/images/demo/sopranos/sopranos4_small.jpg', title:'Sopranos 4'});
+    }
+}
+	
+
+	---------------------------------------------------
+	*********-------PrimeNg(Accordion)------***********
+	---------------------------------------------------
+	-->  import {AccordionModule} from 'primeng/accordion';
+	
+
+	Template:
+	---------
+	<p-accordion (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
+	    <p-accordionTab header="Godfather I" [selected]="true">
+	        Content-1
+	    </p-accordionTab>
+	    <p-accordionTab header="Godfather II">
+	        Content-2
+	    </p-accordionTab>
+	    <p-accordionTab header="Godfather III">
+	        Content-3
+	    </p-accordionTab>
+	</p-accordion>
+	
+
+	TypeScript:
+	-----------
+	export class AccordionDemo {
+	
+
+		constructor() {}
+		
+		onTabClose(event) {
+	        console.log(event.index);
+	    }
+	    
+	    onTabOpen(event) {
+	        console.log(event.index);
+	    }
+	}
+	
+
+	---------------------------------------------------
+	*********-------PrimeNg(TabMenu)------***********
+	---------------------------------------------------
+	--> import {TabMenuModule} from 'primeng/tabmenu';    (app.module.ts)
+	--> import {MenuItem} from 'primeng/api';       (In local component)
+	
+
+	Template:
+	---------
+	<p-tabMenu [model]="items"></p-tabMenu>
+	
+
+	TypeScript:
+	-----------
+	export class TabMenuDemo {
+	    
+	    items: MenuItem[];
+	
+
+	    ngOnInit() {
+	        this.items = [
+	            {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
+	            {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
+	            {label: 'Documentation', icon: 'fa fa-fw fa-book'},
+	            {label: 'Support', icon: 'fa fa-fw fa-support'},
+	            {label: 'Social', icon: 'fa fa-fw fa-twitter'}
+	        ];
+	    }
+	}
+	
+	---------------------------------------------------
+	*********-------PrimeNg(Input Rating)------***********
+	---------------------------------------------------
+	import {RatingModule} from 'primeng/rating'; (app.module.ts)
+	
+	Template:
+	---------
+	<p-rating [(ngModel)]="val"></p-rating>
+	
+	TypeScript:
+	-----------
+	
+	export class ModelComponent {
+
+    val: number = 3;
+
+	}
+
+	---------------------------------------------------
+	*********-------PrimeNg(Input Slider)------***********
+	---------------------------------------------------
+	import {SliderModule} from 'primeng/slider'; (app.module.ts)
+	
+	Template:
+	---------
+	<p-slider [(ngModel)]="val"></p-slider>
+	
+	TypeScript:
+	-----------
+	export class MyModel {
+
+    val: number;
+
+	}
+
+	---------------------------------------------------
+	*********-------PrimeNg(Carousel)------***********
+	---------------------------------------------------
+	import {CarouselModule} from 'primeng/carousel'; (app.module.ts)
+	
+	Template:
+	---------
+	<p-carousel [value]="items">
+    <ng-template let-item pTemplate="item">
+        Content to display
+    </ng-template>
+	</p-carousel>
+	
+	TypeScript:
+	-----------
+	export class CarouselDemo {
+
+    cars: Car[];
+
+    constructor(private messageService: MessageService) {
+        this.cars = [
+            {vin: 'r3278r2', year: 2010, brand: 'Audi', color: 'Black'},
+            {vin: 'jhto2g2', year: 2015, brand: 'BMW', color: 'White'},
+            {vin: 'h453w54', year: 2012, brand: 'Honda', color: 'Blue'},
+            {vin: 'g43gwwg', year: 1998, brand: 'Renault', color: 'White'},
+            {vin: 'gf45wg5', year: 2011, brand: 'VW', color: 'Red'},
+            {vin: 'bhv5y5w', year: 2015, brand: 'Jaguar', color: 'Blue'},
+            {vin: 'ybw5fsd', year: 2012, brand: 'Ford', color: 'Yellow'},
+            {vin: '45665e5', year: 2011, brand: 'Mercedes', color: 'Brown'},
+            {vin: 'he6sb5v', year: 2015, brand: 'Ford', color: 'Black'}
+        ];
+    }
+
+    selectCar(car: Car) {
+        this.messageService.add({severity: 'info', summary: 'Car Selected', detail: 'Vin:' + car.vin});
+    }
+	}
+	
+	
+	---------------------------------------------------
+	*********-------PrimeNg(Table With Filter)------***********
+	---------------------------------------------------
+	import {TableModule} from 'primeng/table'; (app.module.ts)
+	
+	TypeScript:
+	-----------
+	export class TableFilterDemo implements OnInit {
+
+    cars: Car[];
+
+    cols: any[];
+
+    brands: SelectItem[];
+
+    colors: SelectItem[];
+
+    yearFilter: number;
+
+    yearTimeout: any;
+
+    constructor(private carService: CarService) { }
+
+    ngOnInit() {
+        this.carService.getCarsMedium().then(cars => this.cars = cars);
+
+        this.brands = [
+            { label: 'All Brands', value: null },
+            { label: 'Audi', value: 'Audi' },
+            { label: 'BMW', value: 'BMW' },
+            { label: 'Fiat', value: 'Fiat' },
+            { label: 'Honda', value: 'Honda' },
+            { label: 'Jaguar', value: 'Jaguar' },
+            { label: 'Mercedes', value: 'Mercedes' },
+            { label: 'Renault', value: 'Renault' },
+            { label: 'VW', value: 'VW' },
+            { label: 'Volvo', value: 'Volvo' }
+        ];
+
+        this.colors = [
+            { label: 'White', value: 'White' },
+            { label: 'Green', value: 'Green' },
+            { label: 'Silver', value: 'Silver' },
+            { label: 'Black', value: 'Black' },
+            { label: 'Red', value: 'Red' },
+            { label: 'Maroon', value: 'Maroon' },
+            { label: 'Brown', value: 'Brown' },
+            { label: 'Orange', value: 'Orange' },
+            { label: 'Blue', value: 'Blue' }
+        ];
+
+        this.cols = [
+            { field: 'vin', header: 'Vin' },
+            { field: 'year', header: 'Year' },
+            { field: 'brand', header: 'Brand' },
+            { field: 'color', header: 'Color' }
+        ];
+    }
+
+    onYearChange(event, dt) {
+        if (this.yearTimeout) {
+            clearTimeout(this.yearTimeout);
+        }
+
+        this.yearTimeout = setTimeout(() => {
+            dt.filter(event.value, 'year', 'gt');
+        }, 250);
+    }
+	}
+	
+	HTML:
+	-----
+	<p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="caption">
+        <div style="text-align: right">        
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+        <tr>
+            <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                <input *ngSwitchCase="'vin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                <div *ngSwitchCase="'year'">
+                    Value < {{yearFilter}}
+                    <i class="fa fa-close" (click)="yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor:pointer" *ngIf="yearFilter"></i>
+                    <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="yearFilter" [min]="1970" [max]="2010" (onChange)="onYearChange($event, dt)"></p-slider>
+                </div>
+                <p-dropdown *ngSwitchCase="'brand'" [options]="brands" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                <p-multiSelect *ngSwitchCase="'color'" [options]="colors" defaultLabel="All Colors" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+	</p-table>
+	
+	---------------------------------------------------
+	*********-------PrimeNg(Tree Table)------***********
+	---------------------------------------------------
+	import {TreeTableModule} from 'primeng/treetable'; (app.module.ts)
+	import {TreeNode} from 'primeng/api'; (In Local Component)
+	
+	Template:
+	---------
+	<p-treeTable [value]="files">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Type</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr>
+            <td>
+                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                {{rowData.name}}
+            </td>
+            <td>{{rowData.size}}</td>
+            <td>{{rowData.type}}</td>
+        </tr>
+    </ng-template>
+	</p-treeTable>
+	
+	TypeScript:
+	-----------
+	export interface TreeNode {
+    data?: any;
+    children?: TreeNode[];
+    leaf?: boolean;
+    expanded?: boolean;
+	}
+	
+	@Injectable()
+export class NodeService {
+
+    constructor(private http: Http) {}
+
+    getFilesystem() {
+        return this.http.get('showcase/resources/data/filesystem.json')
+                    .toPromise()
+                    .then(res => <TreeNode[]> res.json().data);
+    }
+	}
+	
+	Files get loaded from a service and then bound to the value property whereas header and body templates are used to define the content of these sections:
+	
+	export class TreeTableDemoComponent implements OnInit {
+
+    files: TreeNode[];
+
+    constructor(private nodeService: NodeService) {}
+
+    ngOnInit() {
+        this.nodeService.getFileSystem().then(files => this.files = files);
+    }
+
+	}
+	
+	---------------------------------------------------
+	*********-------PrimeNg(DataView)------***********
+	---------------------------------------------------
+	import {DataViewModule} from 'primeng/dataview'; (app.module.ts)
+	
+	Template:
+	---------
+	<p-dataView [value]="cars">
+    <ng-template let-car pTemplate="listItem">
+        <div>
+            {{car.id}}
+        </div>
+    </ng-template>
+	</p-dataView>
+	
+	TypeScript:
+	-----------
+	export interface Car {
+    vin;
+    year;
+    brand;
+    color;
+	}
+	
+	import {Injectable} from 'angular2/core';
+	import {Http, Response} from 'angular2/http';
+	import {Car} from '../domain/car';
+
+@Injectable()
+export class CarService {
+
+    constructor(private http: Http) {}
+
+    getCarsLarge() {
+        return this.http.get('/showcase/resources/data/cars-large.json')
+                    .toPromise()
+                    .then(res => <Car[]> res.json().data)
+                    .then(data => { return data; });
+    }
+	}
+
+	export class DataViewDemo implements OnInit {
+
+    cars: Car[];
+
+    constructor(private carService: CarService) { }
+
+    ngOnInit() {
+        this.carService.getCarsLarge().then(cars => this.cars = cars);
+    }
+	}
+	
+	
+	---------------------------------------------------
+	*********-------PrimeNg(Charts)------***********
+	---------------------------------------------------
+	To begin with, first you must install the charts.js package using npm and then include it in your project:
+	
+	npm install chart.js --save
+	
+	angular.json:
+	-------------
+	"scripts": [
+    "../node_modules/chart.js/dist/Chart.js",
+    //..others
+	],
+	
+	Chart Component:
+	----------------
+	import {ChartModule} from 'primeng/chart';(app.module.ts)
+	
+	<p-chart type="pie" [data]="data"></p-chart>
+	<button type="button" pButton (click)="update($event)"></button>
+	
+	update(event: Event) {
+    this.data = //create new data
+	}
+	
+	---------------------------------------------------
+	*********-------PrimeNg(Toast)------***********
+	---------------------------------------------------
+	import {ToastModule} from 'primeng/toast'; (app.module.ts)
+	
+	Template:
+	---------
+	<p-toast></p-toast>
+	
+	<p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onConfirm()" label="Yes" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onReject()" label="No" class="ui-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+	</p-toast>
+	
+	TypeScript:
+	-----------
+	import {Component} from '@angular/core';
+	import {MessageService} from 'primeng/api';
+
+@Component({
+    templateUrl: './my.component.html'
+})
+export class MyComponent {
+    
+    constructor(private messageService: MessageService) {}
+    
+    addSingle() {
+        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+    }
+    
+    addMultiple() {
+        this.messageService.addAll([{severity:'success', summary:'Service Message', detail:'Via MessageService'},
+                                    {severity:'info', summary:'Info Message', detail:'Via MessageService'}]);
+    }
+    
+    clear() {
+        this.messageService.clear();
+    }
+	}
+	
+	
+	
+	
+	
+	
+	
